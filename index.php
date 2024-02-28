@@ -12,6 +12,7 @@ define('REDIS_ON', false);
 define('REDIS_HOST', '127.0.0.1');
 define('REDIS_PORT', '6379');
 define('REDIS_EXPIRED', '7000');
+define('REDIS_PASSWORD', 'password');
 define('REDIS_KEY', 'wecom_access_token');
 
 // code
@@ -41,6 +42,7 @@ function redis()
     if (!isset($GLOBALS['REDIS_INSTANCE']) || !$GLOBALS['REDIS_INSTANCE']) {
         $GLOBALS['REDIS_INSTANCE'] = new Redis();
         $GLOBALS['REDIS_INSTANCE']->connect(REDIS_HOST, REDIS_PORT);
+        $GLOBALS['REDIS_INSTANCE']->auth(REDIS_PASSWORD);
     }
 
     return $GLOBALS['REDIS_INSTANCE'];
