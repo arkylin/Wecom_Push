@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Content-Type: application/json; charset=UTF-8");
     echo send_to_wecom(@$_POST['msg'], WECOM_CID, WECOM_SECRET, WECOM_AID, WECOM_TOUID);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (strlen(@$_GET['sendkey']) < 1 || strlen(@$_GET['text']) < 1 || @$_GET['sendkey'] != SENDKEY) {
+    if (strlen(@$_GET['sendkey']) < 1 || strlen(@$_GET['msg']) < 1 || @$_GET['sendkey'] != SENDKEY) {
         die('bad params');
     }
 
