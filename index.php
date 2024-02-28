@@ -17,14 +17,23 @@ define('REDIS_KEY', 'wecom_access_token');
 // code
 // ======================================
 
-if (strlen(@$_REQUEST['sendkey'])  < 1
-    || strlen(@$_REQUEST['text'])  < 1 || @$_REQUEST['sendkey'] != SENDKEY
-) {
-    die('bad params');
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (strlen(@$_POST['sendkey']) < 1 || strlen(@$_POST['msg']) < 1 || @$_POST['sendkey'] != SENDKEY) {
+        die('bad params');
+    }
 
-header("Content-Type: application/json; charset=UTF-8");
-echo send_to_wecom(@$_REQUEST['text'], WECOM_CID, WECOM_SECRET, WECOM_AID, WECOM_TOUID);
+    header("Content-Type: application/json; charset=UTF-8");
+    echo send_to_wecom(@$_POST['msg'], WECOM_CID, WECOM_SECRET, WECOM_AID, WECOM_TOUID);
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (strlen(@$_GET['sendkey']) < 1 || strlen(@$_GET['text']) < 1 || @$_GET['sendkey'] != SENDKEY) {
+        die('bad params');
+    }
+
+    header("Content-Type: application/json; charset=UTF-8");
+    echo send_to_wecom(@$_GET['msg'], WECOM_CID, WECOM_SECRET, WECOM_AID, WECOM_TOUID);
+} else {
+    die('Method not supported');
+}
 
 
 function redis()
