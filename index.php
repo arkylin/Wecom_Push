@@ -12,7 +12,7 @@ define('REDIS_ON', false);
 define('REDIS_HOST', '127.0.0.1');
 define('REDIS_PORT', '6379');
 define('REDIS_EXPIRED', '7000');
-define('REDIS_PASSWORD', 'password');
+define('REDIS_PASSWORD', '');
 define('REDIS_KEY', 'wecom_access_token');
 
 // code
